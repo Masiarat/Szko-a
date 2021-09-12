@@ -8,8 +8,7 @@ int baza;
 int size = 101;
 int n, nom, ilosc;
 vector<int> v(size, 0);
-//vector<int> vr(size,0);
-//vector<int> vl(size,0);
+
 
 int search(int nomMin, int b, int l, int p, int node)
 {
@@ -21,8 +20,6 @@ int search(int nomMin, int b, int l, int p, int node)
     {
         return v[node];
     }
-
-    ala ma kota
 
     if (nomMin <= mid)
     {
@@ -36,24 +33,6 @@ int search(int nomMin, int b, int l, int p, int node)
     return x + y;
 }
 
-// void build(int currV, int l, int r)
-// {
-
-//     //vl[currV] = l;
-//     //vr[currV] = r;
-//     //cout << "dupa" << currV;
-//     if (l == r)
-//     {
-//         return;
-//     }
-
-//     int mid = (l + r) / 2;
-
-//     build(currV * 2, l, mid);
-//     build(currV * 2 + 1, mid + 1, r);
-
-//     return;
-// }
 
 bool update()
 {
@@ -70,7 +49,6 @@ bool update()
         while (i > 1)
         {
             v[i] += ilosc;
-            //cout << "dupa" << v[i];
             i = i / 2;
         }
         return true;
@@ -101,17 +79,9 @@ int main()
     cin >> n;
     baza = n - 1;
     v[1] = 1;
-    //vl[1] = 1;
-    //vr[1] = n;
-    //build(v[1], 1, n);
-    //cin >> iloscOperacji;
     string sprawdzanie;
     
     while(update()){}
 
-    //for (int i = 0; i < iloscOperacji; i++)
-    //{
-    //    update();
-    //cout << v[2];
-    //}
+   
 }
