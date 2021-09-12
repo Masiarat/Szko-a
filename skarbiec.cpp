@@ -22,6 +22,8 @@ int search(int nomMin, int b, int l, int p, int node)
         return v[node];
     }
 
+    ala ma kota
+
     if (nomMin <= mid)
     {
         x = search(nomMin, b, l, mid, 2 * node);
