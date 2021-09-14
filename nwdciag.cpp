@@ -8,7 +8,6 @@ int n;
 int zakresLiczb = 1000;
 int liczba;
 
-vector<int> ciagi[1000000];
 vector<int> liczbyPierwsze;
 
 
