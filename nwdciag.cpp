@@ -14,13 +14,11 @@ vector<int> liczbyPierwsze;
 void obliczLiczbyPierwsze(int a){
 
     int poprawka;
-
     bool *tablica=new bool[a+1];
 	
 	for(int i = 0; i <= a; i++){
         tablica[i] = true;
     } 
-	
 	
 	for(int i = 2; i <= sqrt(a); i++)
 	{
@@ -36,54 +34,9 @@ void obliczLiczbyPierwsze(int a){
 		if(tablica[i] == true) liczbyPierwsze.push_back(i);
 	}
     
-
     delete [] tablica;
-
-    // for (int i = 0; i < liczbyPierwsze.size(); i++)
-    // {
-    //   cout << liczbyPierwsze[i] << " ";
-    // }
     
-
 }
-
-// vector<int> rozkladNaCzynnikiPierwsze(int liczbaRozk){
-    
-//     vector<int> v;
-//     for(int i = 2; liczbyPierwsze[i] < liczbaRozk; i++)
-//     {
-//         if(liczbaRozk % liczbyPierwsze[i] == 0){
-//             v.push_back(i);
-//         }
-//     }
-//     return v;
-// }
-
-// vector<int> WspolneLiczbyPierwsze(int liczba1,int liczba2){
-//     vector<int> v;
-//     for (int i = 0; i < liczbyPierwsze[i]; i++)
-//     {
-//         for(int j = 0; liczba1 % liczbyPierwsze[i]; j++){
-//             if(liczba1 % liczbyPierwsze[i] == 0 && liczba2 % liczbyPierwsze[i] == 0){
-//                 v.push_back(liczbyPierwsze[i]);
-//             }
-//         }
-//     }
-//     return v;
-    
-// }
-
-// bool czyMajaWspolna2(int liczba1,int liczba2){
-//     for (int i = 0; i < liczbyPierwsze.size(); i++)
-//     {
-//         if(liczba1 % liczbyPierwsze[i] == 0 && liczba2 % liczbyPierwsze[i] == 0){
-//             return true;
-//         }
-//     }
-    
-// }
-
-
 
 int znajdzNajwieksza(vector<int> liczby){
     int najw;
@@ -96,7 +49,6 @@ int znajdzNajwieksza(vector<int> liczby){
             }
         }
     }
-    
     return najw;
     
 }
@@ -123,9 +75,6 @@ bool czyMajaWspolna(vector<int> liczby){
             }
             count = 0;
         }
-    //}else{
-    //    cout << "liczby.size < 2";
-    //}
     return false;
     
 }
@@ -137,7 +86,6 @@ int main(){
     int temp2;
     int obecna;
     int najwieksza = 0;
-    //vector<int> poprzednia;
     cin >> n;
     obliczLiczbyPierwsze(zakresLiczb);
     
@@ -147,11 +95,8 @@ int main(){
         liczby.push_back(temp);
         liczby.push_back(temp2);
         int ostatnia = 0;
-        //poprzednia = rozkladNaCzynnikiPierwsze(temp);
         for (int i = 0; i < n - 2; i++)
         {
-            
-            
             if(czyMajaWspolna(liczby)){
                 cout << "wszed";
                 if(liczby.size() > najwieksza){
@@ -176,7 +121,4 @@ int main(){
         cout << "Najwiekszy ciag ma: " << najwieksza << endl;
     
     }
-    
-    
-
 }
