@@ -57,24 +57,22 @@ bool czyMajaWspolna(vector<int> liczby){
 
     int j = 0;
     int count = 0;
-    //if(liczby.size() > 1){ 
-        //cout << liczby.size();
-        for(int i = 0;liczbyPierwsze[i] <= znajdzNajwieksza(liczby); i++){
-            while(j < liczby.size()){
-                cout << " " << liczbyPierwsze[i];
-                if(liczby[j] % liczbyPierwsze[i] == 0){
-                    count++;
-                }else{
-                    break;
-                }
-                j++;
+
+    for(int i = 0;liczbyPierwsze[i] <= znajdzNajwieksza(liczby); i++){
+        while(j < liczby.size()){
+            if(liczby[j] % liczbyPierwsze[i] == 0){
+                count++;
+            }else{
+                break;
             }
-            j = 0;
-            if(count == liczby.size()){
-                return true;
+            j++;
             }
-            count = 0;
+        j = 0;
+        if(count == liczby.size()){
+            return true;
         }
+        count = 0;
+    }
     return false;
     
 }
@@ -98,12 +96,10 @@ int main(){
         for (int i = 0; i < n - 2; i++)
         {
             if(czyMajaWspolna(liczby)){
-                cout << "wszed";
                 if(liczby.size() > najwieksza){
                     najwieksza = liczby.size();
                 }
             }else{
-                cout << "niewszed";
                 ostatnia = liczby[liczby.size() - 1];
                 liczby.clear();
                 liczby.push_back(ostatnia);
