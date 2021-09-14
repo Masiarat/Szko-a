@@ -5,51 +5,179 @@
 using namespace std;
 
 int n;
-int zakresLiczb = 100000;
-vector<int> ciagi[100000];
+int zakresLiczb = 1000;
 int liczba;
+
+vector<int> ciagi[1000000];
 vector<int> liczbyPierwsze;
+
 
 void obliczLiczbyPierwsze(int a){
 
-    int usunieteIndeksy = 0;
+    int poprawka;
 
-	for(int i = 0; i <= a ; i++){
-        liczbyPierwsze.push_back(i);
-    }
+    bool *tablica=new bool[a+1];
+	
+	for(int i = 0; i <= a; i++){
+        tablica[i] = true;
+    } 
 	
 	
-	for(int i = 2; i <= sqrt(a); i++){
-		for(int j = 1;j <= a/i; j++){
-            
+	for(int i = 2; i <= sqrt(a); i++)
+	{
+		if(tablica[i] == true){
+			for(int j = i * i; j <= a; j += i){
+                tablica[j] = false;
+            } 
         }
 	}
-    // for(int i=2; i<=sqrt(a); i++)
-	// {
-	// 	for(int j = i * i; j <= a; j += i){
-    //         liczbyPierwsze.erase(liczbyPierwsze.begin() + i - usunieteIndeksy);
-    //         usunieteIndeksy++;
-    //     } 
-	// }
+	
+	for(int i = 2; i <= a; i++)
+	{
+		if(tablica[i] == true) liczbyPierwsze.push_back(i);
+	}
+    
 
-    for (int i = 0; i < liczbyPierwsze.size(); i++){
-        cout << liczbyPierwsze[i];
-    }   
+    delete [] tablica;
+
+    // for (int i = 0; i < liczbyPierwsze.size(); i++)
+    // {
+    //   cout << liczbyPierwsze[i] << " ";
+    // }
     
 
 }
 
-void rozkladNaCzynnikiPierwsze(int liczbaRozk, int temp1){
+// vector<int> rozkladNaCzynnikiPierwsze(int liczbaRozk){
+    
+//     vector<int> v;
+//     for(int i = 2; liczbyPierwsze[i] < liczbaRozk; i++)
+//     {
+//         if(liczbaRozk % liczbyPierwsze[i] == 0){
+//             v.push_back(i);
+//         }
+//     }
+//     return v;
+// }
+
+// vector<int> WspolneLiczbyPierwsze(int liczba1,int liczba2){
+//     vector<int> v;
+//     for (int i = 0; i < liczbyPierwsze[i]; i++)
+//     {
+//         for(int j = 0; liczba1 % liczbyPierwsze[i]; j++){
+//             if(liczba1 % liczbyPierwsze[i] == 0 && liczba2 % liczbyPierwsze[i] == 0){
+//                 v.push_back(liczbyPierwsze[i]);
+//             }
+//         }
+//     }
+//     return v;
+    
+// }
+
+// bool czyMajaWspolna2(int liczba1,int liczba2){
+//     for (int i = 0; i < liczbyPierwsze.size(); i++)
+//     {
+//         if(liczba1 % liczbyPierwsze[i] == 0 && liczba2 % liczbyPierwsze[i] == 0){
+//             return true;
+//         }
+//     }
+    
+// }
+
+
+
+int znajdzNajwieksza(vector<int> liczby){
+    int najw;
+    najw = liczby[0];
+    if(liczby.size() > 1){
+        for (int i = 1; i < liczby.size(); i++)
+        {
+            if(najw < liczby[i]){
+                najw = liczby[i];
+            }
+        }
+    }
+    
+    return najw;
+    
+}
+
+bool czyMajaWspolna(vector<int> liczby){
+
+    int j = 0;
+    int count = 0;
+    //if(liczby.size() > 1){ 
+        //cout << liczby.size();
+        for(int i = 0;liczbyPierwsze[i] <= znajdzNajwieksza(liczby); i++){
+            while(j < liczby.size()){
+                cout << " " << liczbyPierwsze[i];
+                if(liczby[j] % liczbyPierwsze[i] == 0){
+                    count++;
+                }else{
+                    break;
+                }
+                j++;
+            }
+            j = 0;
+            if(count == liczby.size()){
+                return true;
+            }
+            count = 0;
+        }
+    //}else{
+    //    cout << "liczby.size < 2";
+    //}
+    return false;
     
 }
 
 int main(){
 
+    vector<int> liczby;
+    int temp;
+    int temp2;
+    int obecna;
+    int najwieksza = 0;
+    //vector<int> poprzednia;
     cin >> n;
     obliczLiczbyPierwsze(zakresLiczb);
     
-    // for (int i = 0; i < n; i++){
-    // }
+    if(n > 2){
+        cin >> temp;
+        cin >> temp2;
+        liczby.push_back(temp);
+        liczby.push_back(temp2);
+        int ostatnia = 0;
+        //poprzednia = rozkladNaCzynnikiPierwsze(temp);
+        for (int i = 0; i < n - 2; i++)
+        {
+            
+            
+            if(czyMajaWspolna(liczby)){
+                cout << "wszed";
+                if(liczby.size() > najwieksza){
+                    najwieksza = liczby.size();
+                }
+            }else{
+                cout << "niewszed";
+                ostatnia = liczby[liczby.size() - 1];
+                liczby.clear();
+                liczby.push_back(ostatnia);
+            }
+            cin >> obecna;
+            liczby.push_back(obecna);
+            
+        }
+        if(czyMajaWspolna(liczby)){
+            if(liczby.size() > najwieksza){
+                najwieksza = liczby.size();
+            }
+        }
+        
+        cout << "Najwiekszy ciag ma: " << najwieksza << endl;
+    
+    }
+    
     
 
 }
