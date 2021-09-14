@@ -5,7 +5,7 @@
 using namespace std;
 
 int n;
-int zakresLiczb = 1000;
+int zakresLiczb = 100000000;
 int liczba;
 
 vector<int> liczbyPierwsze;
