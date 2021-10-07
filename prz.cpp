@@ -2,13 +2,14 @@
 #include<vector>
 using namespace std;
 
-int n,m,maks;
+int n,m,maks,ostatniMaks;
 int arr[10000];
 vector<int> zmieniony;
 
 bool czyJestTakiZmieniony(int input){
     for (int i = 0; i < zmieniony.size(); i++)
     {
+        //cout << "dupa " << input << endl;
         if(zmieniony[i] == input){
             return true;
         }
@@ -24,20 +25,40 @@ cin >> n >> m;
     {
         int input;
         cin >> input;
+        input--;
 
-        if(input == n + 1){
-            //specjalny
-            
+        if(input == n){
+            for (int a = 0; a < zmieniony.size(); a++)
+            {
+                arr[zmieniony[a]] = 0;
+            }
+            zmieniony.clear();
+            ostatniMaks = maks;
         }else{
             //dodaj
-            arr[input - 1]++;
+            arr[input]++;
             //jezeli jeszcze nie zanotowales, zanotuj ze zmieniony
             if(!czyJestTakiZmieniony(input)){
-                zmieniony.push_back(input - 1);
+                //cout << "dupa2 " << input << endl;
+                zmieniony.push_back(input);
             }
+            if(arr[input] > maks){
+                maks = arr[input];
+            }
+
         }
 
     }
+
+    for (int i = 0; i < n; i++)
+    {
+        if(arr[i] == 0){
+            cout << ostatniMaks << " ";
+        }else{
+            cout << ostatniMaks + arr[i] << " ";
+        }
+    }
+    
     
 
     
