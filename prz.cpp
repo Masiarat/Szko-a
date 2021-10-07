@@ -1,21 +1,12 @@
 #include<iostream>
 #include<vector>
+#include<unordered_set>
 using namespace std;
 
 int n,m,maks,ostatniMaks;
-int arr[10000];
-vector<int> zmieniony;
+int arr[1000000];
+unordered_set<int> zmienione;
 
-bool czyJestTakiZmieniony(int input){
-    for (int i = 0; i < zmieniony.size(); i++)
-    {
-        //cout << "dupa " << input << endl;
-        if(zmieniony[i] == input){
-            return true;
-        }
-    }
-    return false;
-}
 
 int main(){
 
@@ -31,22 +22,19 @@ cin >> n >> m;
         input--;
 
         if(input == n){
-            for (int a = 0; a < zmieniony.size(); a++)
-            {
-                arr[zmieniony[a]] = 0;
-            }
-            zmieniony.clear();
+            zmienione.clear();
             ostatniMaks = maks;
+
         }else{
-            //dodaj
-            arr[input]++;
-            //jezeli jeszcze nie zanotowales, zanotuj ze zmieniony
-            if(!czyJestTakiZmieniony(input)){
-                //cout << "dupa2 " << input << endl;
-                zmieniony.push_back(input);
+            if(zmienione.find(input) == zmienione.end()){
+                zmienione.insert(input);
+                arr[input] = ostatniMaks + 1;
+            }else{
+                arr[input]++;
             }
-            if(arr[input] + ostatniMaks > maks){
-                maks = arr[input] + ostatniMaks;
+            
+            if(arr[input] > maks){
+                maks = arr[input];
             }
 
         }
@@ -55,10 +43,10 @@ cin >> n >> m;
 
     for (int i = 0; i < n; i++)
     {
-        if(arr[i] == 0){
-            cout << ostatniMaks << " ";
+        if(zmienione.find(i) != zmienione.end()){
+            cout << arr[i] << " ";
         }else{
-            cout << ostatniMaks + arr[i] << " ";
+            cout << ostatniMaks << " ";
         }
     }
     
