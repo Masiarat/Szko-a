@@ -45,8 +45,8 @@ cin >> n >> m;
                 //cout << "dupa2 " << input << endl;
                 zmieniony.push_back(input);
             }
-            if(arr[input] > maks){
-                maks = arr[input];
+            if(arr[input] + ostatniMaks > maks){
+                maks = arr[input] + ostatniMaks;
             }
 
         }
