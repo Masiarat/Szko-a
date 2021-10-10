@@ -4,9 +4,14 @@ using namespace std;
 
 class Bakteria {
     public:
+    Bakteria(){
+        this -> IQ = 0;
+        this -> mass = 0;
+        this -> DoJakiejKoloniNalezy = -1;
+    }
     int IQ;
     int mass;
-    int DoJakiejKoloniNalezy = -1;
+    int DoJakiejKoloniNalezy;
 };
 
 class Kolonia {
@@ -19,10 +24,12 @@ class Kolonia {
 
 vector<int> dodajVektory(vector<int> pierwszy, vector<int> drugi){
     vector<int> v = drugi;
-    for (int i = 0; i < pierwszy.size(); i++)
-    {
-        v.push_back(pierwszy[i]);
-    }
+    // for (int i = 0; i < pierwszy.size(); i++)
+    // {
+    //     v.push_back(pierwszy[i]);
+    // }
+    // return v;
+    v.insert(v.end(), pierwszy.begin(), pierwszy.end() );
     return v;
 }
 
@@ -94,9 +101,17 @@ int main(){
                     Kolonie[Bakterie[ktora].DoJakiejKoloniNalezy].IQ_MIN = Kolonie[Bakterie[druga].DoJakiejKoloniNalezy].IQ_MIN;
                 }
                 Kolonie[Bakterie[ktora].DoJakiejKoloniNalezy].mass += Kolonie[Bakterie[druga].DoJakiejKoloniNalezy].mass;
+                cout << "Kolonie[Bakterie[druga].DoJakiejKoloniNalezy].NalezaceBakterie.size(): " << Kolonie[Bakterie[druga].DoJakiejKoloniNalezy].NalezaceBakterie.size() << endl;
                 for (int i = 0; i < Kolonie[Bakterie[druga].DoJakiejKoloniNalezy].NalezaceBakterie.size(); i++)
                 {
+
+                    cout <<"Bakterie[Kolonie[Bakterie[druga].DoJakiejKoloniNalezy].NalezaceBakterie[i]].DoJakiejKoloniNalezy: " << Bakterie[Kolonie[Bakterie[druga].DoJakiejKoloniNalezy].NalezaceBakterie[i]].DoJakiejKoloniNalezy <<endl;
+                    cout <<"TRANSFORMACJAAA"<<endl;
                     Bakterie[Kolonie[Bakterie[druga].DoJakiejKoloniNalezy].NalezaceBakterie[i]].DoJakiejKoloniNalezy = Bakterie[ktora].DoJakiejKoloniNalezy;
+                    cout << "Kolonie[Bakterie[druga].DoJakiejKoloniNalezy].NalezaceBakterie.size(): " << Kolonie[Bakterie[druga].DoJakiejKoloniNalezy].NalezaceBakterie.size() << endl;
+                    cout <<"i: "<<i<<endl;
+                    cout << "Kolonie[Bakterie[druga].DoJakiejKoloniNalezy].NalezaceBakterie[i]: " << Kolonie[Bakterie[druga].DoJakiejKoloniNalezy].NalezaceBakterie[i] << endl;
+                    cout <<"Bakterie[Kolonie[Bakterie[druga].DoJakiejKoloniNalezy].NalezaceBakterie[i]].DoJakiejKoloniNalezy: " << Bakterie[Kolonie[Bakterie[druga].DoJakiejKoloniNalezy].NalezaceBakterie[i]].DoJakiejKoloniNalezy <<endl;
                 }
                 
                 Kolonie[Bakterie[ktora].DoJakiejKoloniNalezy].NalezaceBakterie = dodajVektory(Kolonie[Bakterie[druga].DoJakiejKoloniNalezy].NalezaceBakterie, Kolonie[Bakterie[ktora].DoJakiejKoloniNalezy].NalezaceBakterie);
@@ -120,12 +135,14 @@ int main(){
                 Kolonie[Bakterie[druga].DoJakiejKoloniNalezy].NalezaceBakterie = dodajVektory(Kolonie[Bakterie[ktora].DoJakiejKoloniNalezy].NalezaceBakterie, Kolonie[Bakterie[ktora].DoJakiejKoloniNalezy].NalezaceBakterie);
             }
         }else if(operacja == "IQ_MAX"){
+            cout << "Bakterie[ktora].DoJakiejKoloniNalezy: "<<Bakterie[ktora].DoJakiejKoloniNalezy<<endl;
             if(Bakterie[ktora].DoJakiejKoloniNalezy == -1){
                 cout << Bakterie[ktora].IQ << endl;
             }else{
                 cout <<  Kolonie[Bakterie[ktora].DoJakiejKoloniNalezy].IQ_MAX << endl;
             }
         }else if(operacja == "IQ_MIN"){
+            cout << "Bakterie[ktora].DoJakiejKoloniNalezy: "<<Bakterie[ktora].DoJakiejKoloniNalezy<<endl;
             if(Bakterie[ktora].DoJakiejKoloniNalezy == -1){
                 cout << Bakterie[ktora].IQ << endl;
             }else{
@@ -135,6 +152,7 @@ int main(){
             if(Bakterie[ktora].DoJakiejKoloniNalezy == -1){
                 cout << Bakterie[ktora].mass << endl;
             }else{
+                cout << "Bakterie[ktora].DoJakiejKoloniNalezy: "<<Bakterie[ktora].DoJakiejKoloniNalezy<<endl;
                 cout <<  Kolonie[Bakterie[ktora].DoJakiejKoloniNalezy].mass << endl;
             }
         }
